@@ -1,7 +1,0 @@
-{
-	"name": "CheckInBoard",
-	"integrations": {
-		"capacitor": {}
-	},
-	"type": "vue"
-}
