@@ -12,10 +12,7 @@
             <ion-row>
               {#each stars as star, id}
                 <ion-col>
-                  <ion-icon
-                    name="{star}"
-                    id="{id + 1}"
-                    on:click="{starClick}"
+                  <ion-icon name="{star}" id="{id + 1}" on:click="{starClick}"
                   ></ion-icon>
                 </ion-col>
               {/each}
@@ -29,8 +26,7 @@
               <ion-row>
                 <ion-col>{label} ({rateCount[5 - id]})</ion-col>
                 <ion-col>
-                  <ion-progress-bar
-                    value="{rateCount[5 - id] / rateTotal}"
+                  <ion-progress-bar value="{rateCount[5 - id] / rateTotal}"
                   ></ion-progress-bar>
                 </ion-col>
               </ion-row>
@@ -45,8 +41,7 @@
                   value="{value}"
                   on:ionChange="{checkBoxChange}"
                   color="dark"
-                  slot="start"
-                ></ion-checkbox>
+                  slot="start"></ion-checkbox>
                 <ion-label>{label}</ion-label>
               </ion-item>
             {/each}

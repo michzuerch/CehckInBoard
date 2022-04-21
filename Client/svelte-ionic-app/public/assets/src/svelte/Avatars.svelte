@@ -94,7 +94,8 @@
       {/each}
     </ion-list>
   </ion-card>
-  Scroll me vertically (not implemented correctly) <br /> Courtesy : https://github.com/thenaim/ionic-tk-social-network
+  Scroll me vertically (not implemented correctly) <br /> Courtesy :
+  https://github.com/thenaim/ionic-tk-social-network
   <br /> https://s3.amazonaws.com/uifaces/faces/twitter/yayteejay/128.jpg
 </ion-content>
 

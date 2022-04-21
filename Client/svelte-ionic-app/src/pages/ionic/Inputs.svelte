@@ -19,10 +19,7 @@
           First Name
           <ion-text color="danger">*</ion-text>
         </ion-label>
-        <ion-input
-          on:ionChange="{handleFirstNameValue}"
-          required
-          type="text"
+        <ion-input on:ionChange="{handleFirstNameValue}" required type="text"
         ></ion-input>
       </ion-item>
 
@@ -31,10 +28,7 @@
           Last Name
           <ion-text color="danger">*</ion-text>
         </ion-label>
-        <ion-input
-          on:ionChange="{handleLastNameValue}"
-          required
-          type="text"
+        <ion-input on:ionChange="{handleLastNameValue}" required type="text"
         ></ion-input>
       </ion-item>
 
@@ -45,19 +39,13 @@
 
       <ion-item>
         <ion-label position="stacked">Address</ion-label>
-        <ion-input
-          placeholder="Address Line 1"
-          on:ionChange="{changeValue}"
+        <ion-input placeholder="Address Line 1" on:ionChange="{changeValue}"
         ></ion-input>
-        <ion-input
-          placeholder="Address Line 2"
-          on:ionChange="{changeValue}"
+        <ion-input placeholder="Address Line 2" on:ionChange="{changeValue}"
         ></ion-input>
         <ion-input placeholder="City" on:ionChange="{changeValue}"></ion-input>
         <ion-input placeholder="State" on:ionChange="{changeValue}"></ion-input>
-        <ion-input
-          placeholder="Zip Code"
-          on:ionChange="{changeValue}"
+        <ion-input placeholder="Zip Code" on:ionChange="{changeValue}"
         ></ion-input>
       </ion-item>
 

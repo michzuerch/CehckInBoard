@@ -1,3 +1,26 @@
+<ion-header translucent="true">
+  <ion-toolbar>
+    <ion-title>Ionic UI Companion</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <br />
+  <br />
+  <br />
+  <div class="ion-text-center">
+    <img
+      src="/assets/img/great-success.png"
+      alt="Great success"
+      in:scale="{{ duration: 1900, easing: elasticInOut }}"
+    />
+
+    <div in:scale="{{ delay: 400, duration: 1900, easing: elasticInOut }}">
+      Great success!
+    </div>
+  </div>
+</ion-content>
+
 <style>
 img {
   width: 60%;
@@ -51,26 +74,3 @@ console.log("CAPACITOR PLUGINS", Plugins);
 
     */
 </script>
-
-<ion-header translucent="true">
-  <ion-toolbar>
-    <ion-title>Ionic UI Companion</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content>
-  <br />
-  <br />
-  <br />
-  <div class="ion-text-center">
-    <img
-      src="/assets/img/great-success.png"
-      alt="Great success"
-      in:scale="{{ duration: 1900, easing: elasticInOut }}"
-    />
-
-    <div in:scale="{{ delay: 400, duration: 1900, easing: elasticInOut }}">
-      Great success!
-    </div>
-  </div>
-</ion-content>

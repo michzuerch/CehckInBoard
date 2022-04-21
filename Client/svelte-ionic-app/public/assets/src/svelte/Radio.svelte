@@ -23,11 +23,7 @@
 
       <ion-item>
         <ion-label>Grape</ion-label>
-        <ion-radio
-          slot="start"
-          color="tertiary"
-          value="grape"
-          checked
+        <ion-radio slot="start" color="tertiary" value="grape" checked
         ></ion-radio>
       </ion-item>
 

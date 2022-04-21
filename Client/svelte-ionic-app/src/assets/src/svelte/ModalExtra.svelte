@@ -13,8 +13,7 @@
   <ion-list>
     <ion-item>
       <ion-avatar slot="start">
-        <ion-img
-          src="https://www.gravatar.com/avatar/1?d=monsterid&f=y"
+        <ion-img src="https://www.gravatar.com/avatar/1?d=monsterid&f=y"
         ></ion-img>
       </ion-avatar>
       <ion-label>
@@ -24,8 +23,7 @@
     </ion-item>
     <ion-item>
       <ion-avatar slot="start">
-        <ion-img
-          src="https://www.gravatar.com/avatar/2?d=monsterid&f=y"
+        <ion-img src="https://www.gravatar.com/avatar/2?d=monsterid&f=y"
         ></ion-img>
       </ion-avatar>
       <ion-label>
@@ -35,8 +33,7 @@
     </ion-item>
     <ion-item>
       <ion-avatar slot="start">
-        <ion-img
-          src="https://www.gravatar.com/avatar/3?d=monsterid&f=y"
+        <ion-img src="https://www.gravatar.com/avatar/3?d=monsterid&f=y"
         ></ion-img>
       </ion-avatar>
       <ion-label>

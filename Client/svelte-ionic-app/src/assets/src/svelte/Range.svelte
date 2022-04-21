@@ -44,11 +44,7 @@
         snaps
         color="danger"
       >
-        <ion-icon
-          slot="start"
-          size="small"
-          color="danger"
-          name="thermometer"
+        <ion-icon slot="start" size="small" color="danger" name="thermometer"
         ></ion-icon>
         <ion-icon slot="end" color="danger" name="thermometer"></ion-icon>
       </ion-range>

@@ -15,9 +15,9 @@
     <ion-slide>
       <img src="../assets/img/slides/slide-1.png" alt="pict" />
       <h2>Welcome!</h2>
-      The <b>Ionic UI App</b> is a practical preview of the ionic framework, and
-      a demonstration of proper use (ahum!!) in svelte or even other languages. <br
-      />
+      The<b>Ionic UI App</b> is a practical preview of the ionic framework, and
+      a demonstration of proper use (ahum!!) in svelte or even other languages.
+      <br />
       <br />
       <br />
     </ion-slide>
@@ -26,7 +26,7 @@
       <img src="../assets/img/slides/svelte.png" alt="pict" />
       <h2>Handy tool!</h2>
       By clicking the button bottom right you can instantly view the source code
-      of the element you are viewing, to copy/paste and direct link to API docs. <br
+      of the element you are viewing, to copy/paste and direct link to API docs.<br
       />
       <br />
       <br />
@@ -36,8 +36,8 @@
       <img src="../assets/img/slides/slide-2.png" alt="pict" />
       <h2>What is Ionic?</h2>
 
-      <b>Ionic Framework</b> is an open source SDK that enables developers to build
-      high quality mobile apps with web technologies. <br />
+      <b>Ionic Framework</b> is an open source SDK that enables developers to
+      build high quality mobile apps with web technologies. <br />
       <br />
       <br />
     </ion-slide>

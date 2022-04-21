@@ -25,8 +25,7 @@
       <ion-datetime
         on:ionChange="{changeValue}"
         value="1990-02-19"
-        placeholder="Select Date"
-      ></ion-datetime>
+        placeholder="Select Date"></ion-datetime>
     </ion-item>
     <ion-item>
       <ion-label>Start Time</ion-label>
@@ -34,16 +33,14 @@
         on:ionChange="{changeValue}"
         display-format="h:mm A"
         picker-format="h:mm A"
-        value="1990-02-19T07:43Z"
-      ></ion-datetime>
+        value="1990-02-19T07:43Z"></ion-datetime>
     </ion-item>
     <ion-item>
       <ion-label>Ends</ion-label>
       <ion-datetime
         on:ionChange="{changeValue}"
         value="1990-02-20"
-        placeholder="Select Date"
-      ></ion-datetime>
+        placeholder="Select Date"></ion-datetime>
     </ion-item>
     <ion-item>
       <ion-label>Repeat</ion-label>

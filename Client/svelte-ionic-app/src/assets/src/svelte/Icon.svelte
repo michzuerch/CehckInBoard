@@ -10,9 +10,7 @@
     </ion-buttons>
   </ion-toolbar>
   <ion-toolbar>
-    <ion-searchbar
-      show-cancel-button="'never'"
-      bind:this="{searchBar}"
+    <ion-searchbar show-cancel-button="'never'" bind:this="{searchBar}"
     ></ion-searchbar>
   </ion-toolbar>
 </ion-header>

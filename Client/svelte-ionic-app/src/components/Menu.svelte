@@ -21,8 +21,7 @@
             <ion-icon
               name="{menuItem.icon}"
               slot="start"
-              color="{getRandomColor()}"
-            ></ion-icon>
+              color="{getRandomColor()}"></ion-icon>
             <ion-label>{menuItem.label}</ion-label>
           </ion-item>
         {/each}
@@ -34,7 +33,10 @@
         <ion-item
           on:click="{() => {
             GITHUBclick();
-            window.open('https://github.com/Tommertom/svelte-ionic-app', '_blank');
+            window.open(
+              'https://github.com/Tommertom/svelte-ionic-app',
+              '_blank'
+            );
           }}"
         >
           <ion-icon name="logo-github" slot="start"></ion-icon>
@@ -43,7 +45,10 @@
         <ion-item
           on:click="{() => {
             FORUMclick();
-            window.open('https://forum.ionicframework.com/t/ionicsvelte-all-of-ionics-ui-in-one-svelte-app', '_blank');
+            window.open(
+              'https://forum.ionicframework.com/t/ionicsvelte-all-of-ionics-ui-in-one-svelte-app',
+              '_blank'
+            );
           }}"
         >
           <ion-icon name="logo-ionic" slot="start"></ion-icon>

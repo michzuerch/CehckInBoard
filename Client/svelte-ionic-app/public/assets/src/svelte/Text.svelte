@@ -1,13 +1,7 @@
-<style>
-  h1 {
-    margin-top: 0;
-  }
-</style>
-
 <ion-header translucent="true">
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-menu-button />
+      <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>Text</ion-title>
   </ion-toolbar>
@@ -51,3 +45,9 @@
     id pharetra et, cursus at lectus.
   </p>
 </ion-content>
+
+<style>
+h1 {
+  margin-top: 0;
+}
+</style>

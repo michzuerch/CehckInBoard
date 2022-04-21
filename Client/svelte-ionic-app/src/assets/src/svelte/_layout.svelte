@@ -1,5 +1,5 @@
-<script>
-  console.log("Ionic layout");
-</script>
-
 <slot />
+
+<script>
+console.log("Ionic layout");
+</script>

@@ -1,4 +1,4 @@
-import App from './App.svelte';
+import App from "./App.svelte";
 
 // import { myRoutes as routes } from "./myRoutes.js";
 
@@ -7,10 +7,10 @@ import App from './App.svelte';
 import { routes } from "./routes/routes";
 
 const app = new App({
-	target: document.body,
-	props: {
-		routes
-	}
+  target: document.body,
+  props: {
+    routes,
+  },
 });
 
 export default app;

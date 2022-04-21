@@ -50,8 +50,7 @@
     style="-webkit-user-select: text; /* Chrome 49+ */
   -moz-user-select: text; /* Firefox 43+ */
   -ms-user-select: text; /* No support yet */
-  user-select: text; /* Likely future */"
-  >{sourceCode}</pre>
+  user-select: text; /* Likely future */">{sourceCode}</pre>
 </ion-content>
 
 <style>

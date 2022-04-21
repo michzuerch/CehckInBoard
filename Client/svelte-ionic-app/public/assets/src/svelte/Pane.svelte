@@ -20,10 +20,8 @@
       Right like in Apple Maps, Apple Stocks, Apple Music and other modern apps.
       Lightweight, Multiplatform, Open Source. For progressive applications.
     </p>
-    <br /> Repo: <a
-      href="https://github.com/roman-rr/cupertino-pane"
-      target="_blank"
-    >
+    <br /> Repo:
+    <a href="https://github.com/roman-rr/cupertino-pane" target="_blank">
       roman-rr/cupertino-pane
     </a>
   </ion-text>

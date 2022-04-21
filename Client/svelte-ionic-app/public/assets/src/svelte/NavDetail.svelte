@@ -13,8 +13,7 @@
   <ion-icon
     name="{'logo-' + tech.icon}"
     style="color: {tech.color}"
-    size="large"
-  ></ion-icon>
+    size="large"></ion-icon>
   <p>{tech.description}</p>
 </ion-content>
 
