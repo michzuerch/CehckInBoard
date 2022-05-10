@@ -114,3 +114,24 @@ func UpdateUser(c *fiber.Ctx) error {
 	return c.Status(fiber.StatusOK).JSON(responseUser)
 
 }
+
+func DeleteUser(c *fiber.Ctx) error {
+	id, err := c.ParamsInt("id")
+
+	fmt.Printf("DeleteUser(%v)", id)
+
+	var user models.User
+
+	if err != nil {
+		return c.Status(fiber.StatusBadRequest).JSON(":id must be integer")
+	}
+	if err := findUser(id, &user); err != nil {
+		return c.Status(fiber.StatusBadRequest).JSON(err.Error())
+	}
+
+	if err := database.Database.Db.Delete(&user).Error; err != nil {
+		return c.Status(fiber.StatusBadRequest).JSON(err.Error())
+	}
+
+	return c.Status(fiber.StatusOK).SendString("Successfully deleted user")
+}
