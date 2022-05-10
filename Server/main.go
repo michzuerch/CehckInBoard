@@ -25,6 +25,6 @@ func main() {
 	database.ConnectDb()
 
 	app := fiber.New()
-	setupRoutes()
+	setupRoutes(app)
 	log.Fatal(app.Listen(":3000"))
 }
