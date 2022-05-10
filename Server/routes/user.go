@@ -2,6 +2,7 @@ package routes
 
 import (
 	"errors"
+	"fmt"
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/michzuerch/CheckInBoard/database"
@@ -76,4 +77,40 @@ func GetUser(c *fiber.Ctx) error {
 	responseUser := CreateResponseUser(user)
 
 	return c.Status(fiber.StatusOK).JSON(responseUser)
+}
+
+func UpdateUser(c *fiber.Ctx) error {
+	id, err := c.ParamsInt("id")
+
+	fmt.Printf("UpdateUser(%v)", id)
+
+	var user models.User
+
+	if err != nil {
+		return c.Status(fiber.StatusBadRequest).JSON(":id must be integer")
+	}
+
+	if err := findUser(id, &user); err != nil {
+		return c.Status(fiber.StatusBadRequest).JSON(err.Error())
+	}
+
+	type UpdateUser struct {
+		FirstName string `json:"first_name"`
+		LastName  string `json:"last_name"`
+	}
+
+	var updateData UpdateUser
+
+	if err := c.BodyParser(&updateData); err != nil {
+		return c.Status(fiber.StatusBadRequest).JSON(err.Error())
+	}
+
+	user.FirstName = updateData.FirstName
+	user.LastName = updateData.LastName
+
+	database.Database.Db.Save(&user)
+
+	responseUser := CreateResponseUser(user)
+	return c.Status(fiber.StatusOK).JSON(responseUser)
+
 }
