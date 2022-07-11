@@ -1,6 +1,6 @@
 development:
     dialect: sqlite3
-    datasource: test.db
+    datasource: CheckInBoard.db
     dir: migrations/sqlite3
 
 production:
