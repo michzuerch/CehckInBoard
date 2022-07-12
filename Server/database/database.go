@@ -32,7 +32,7 @@ func ConnectDb() {
 
 	// TODO: Add migrations
 
-	db.AutoMigrate(&models.User{}, &models.Product{}, &models.Order{})
+	// db.AutoMigrate(&models.User{}, &models.Product{}, &models.Order{})
 
 	Database = DbInstance{Db: db}
 

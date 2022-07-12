@@ -1,10 +1,5 @@
 development:
-    dialect: sqlite3
-    datasource: CheckInBoard.db
-    dir: migrations/sqlite3
-
-production:
     dialect: postgres
     datasource: dbname=CheckInBoard sslmode=disable
-    dir: migrations/postgres
+    dir: migrations/postgresql
     table: migrations
