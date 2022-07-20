@@ -4,7 +4,7 @@ import (
 	"log"
 	"os"
 
-	"github.com/michzuerch/CheckInBoard/models"
+	// "github.com/michzuerch/CheckInBoard/models"
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"

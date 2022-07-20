@@ -6,7 +6,7 @@ import (
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/michzuerch/CheckInBoard/database"
-	"github.com/michzuerch/CheckInBoard/models"
+	"github.com/michzuerch/CheckInBoard/restmodels"
 )
 
 type User struct {
@@ -16,7 +16,7 @@ type User struct {
 	LastName  string `json:"last_name"`
 }
 
-func CreateResponseUser(userModel models.User) User {
+func CreateResponseUser(userModel restmodels.User) User {
 
 	return User{
 		ID: userModel.ID, FirstName: userModel.FirstName, LastName: userModel.LastName,
@@ -24,7 +24,7 @@ func CreateResponseUser(userModel models.User) User {
 }
 
 func CreateUser(c *fiber.Ctx) error {
-	var user models.User
+	var user restmodels.User
 
 	if err := c.BodyParser(&user); err != nil {
 		return c.Status(fiber.StatusBadRequest).JSON(err.Error())
@@ -37,7 +37,7 @@ func CreateUser(c *fiber.Ctx) error {
 }
 
 func GetUsers(c *fiber.Ctx) error {
-	users := []models.User{}
+	users := []restmodels.User{}
 	database.Database.Db.Find(&users)
 
 	responseUsers := []User{}
@@ -51,7 +51,7 @@ func GetUsers(c *fiber.Ctx) error {
 	return c.Status(fiber.StatusOK).JSON(responseUsers)
 }
 
-func findUser(id int, user *models.User) error {
+func findUser(id int, user *restmodels.User) error {
 	database.Database.Db.Find(user, "id = ?", id)
 
 	if user.ID == 0 {
@@ -64,7 +64,7 @@ func findUser(id int, user *models.User) error {
 func GetUser(c *fiber.Ctx) error {
 	id, err := c.ParamsInt("id")
 
-	var user models.User
+	var user restmodels.User
 
 	if err != nil {
 		return c.Status(fiber.StatusBadRequest).JSON(":id must be integer")
@@ -84,7 +84,7 @@ func UpdateUser(c *fiber.Ctx) error {
 
 	fmt.Printf("UpdateUser(%v)", id)
 
-	var user models.User
+	var user restmodels.User
 
 	if err != nil {
 		return c.Status(fiber.StatusBadRequest).JSON(":id must be integer")
@@ -120,7 +120,7 @@ func DeleteUser(c *fiber.Ctx) error {
 
 	fmt.Printf("DeleteUser(%v)", id)
 
-	var user models.User
+	var user restmodels.User
 
 	if err != nil {
 		return c.Status(fiber.StatusBadRequest).JSON(":id must be integer")
