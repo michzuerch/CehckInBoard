@@ -1,13 +1,12 @@
 package database
 
 import (
+	"database/sql"
 	"log"
 	"os"
 
-	// "github.com/michzuerch/CheckInBoard/models"
-	"gorm.io/driver/sqlite"
+	. "github.com/volatiletech/sqlboiler/v4/queries/qm"
 	"gorm.io/gorm"
-	"gorm.io/gorm/logger"
 )
 
 type DbInstance struct {
@@ -17,23 +16,13 @@ type DbInstance struct {
 var Database DbInstance
 
 func ConnectDb() {
-	db, err := gorm.Open(sqlite.Open("CheckInBoard.db"), &gorm.Config{})
 
+	db, err := sql.Open("postgres", "dbname=CheckInData user=michzuerch")
 	if err != nil {
 		log.Fatal("Failed to connect to the database.\n", err.Error())
 		os.Exit(2)
 	}
 
 	log.Println("Connected to the database successfuly")
-
-	db.Logger = logger.Default.LogMode(logger.Info)
-
-	log.Println("Running migrations")
-
-	// TODO: Add migrations
-
-	// db.AutoMigrate(&models.User{}, &models.Product{}, &models.Order{})
-
-	Database = DbInstance{Db: db}
 
 }
