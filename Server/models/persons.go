@@ -25,6 +25,8 @@ import (
 // Person is an object representing the database table.
 type Person struct {
 	ID           int64       `boil:"id" json:"id" toml:"id" yaml:"id"`
+	CreatedAt    null.Time   `boil:"createdAt" json:"createdAt,omitempty" toml:"createdAt" yaml:"createdAt,omitempty"`
+	UpdatedAt    null.Time   `boil:"updatedAt" json:"updatedAt,omitempty" toml:"updatedAt" yaml:"updatedAt,omitempty"`
 	Firstname    string      `boil:"firstname" json:"firstname" toml:"firstname" yaml:"firstname"`
 	Lastname     string      `boil:"lastname" json:"lastname" toml:"lastname" yaml:"lastname"`
 	Birthdate    null.Time   `boil:"birthdate" json:"birthdate,omitempty" toml:"birthdate" yaml:"birthdate,omitempty"`
@@ -36,12 +38,16 @@ type Person struct {
 
 var PersonColumns = struct {
 	ID           string
+	CreatedAt    string
+	UpdatedAt    string
 	Firstname    string
 	Lastname     string
 	Birthdate    string
 	Emailaddress string
 }{
 	ID:           "id",
+	CreatedAt:    "createdAt",
+	UpdatedAt:    "updatedAt",
 	Firstname:    "firstname",
 	Lastname:     "lastname",
 	Birthdate:    "birthdate",
@@ -50,12 +56,16 @@ var PersonColumns = struct {
 
 var PersonTableColumns = struct {
 	ID           string
+	CreatedAt    string
+	UpdatedAt    string
 	Firstname    string
 	Lastname     string
 	Birthdate    string
 	Emailaddress string
 }{
 	ID:           "persons.id",
+	CreatedAt:    "persons.createdAt",
+	UpdatedAt:    "persons.updatedAt",
 	Firstname:    "persons.firstname",
 	Lastname:     "persons.lastname",
 	Birthdate:    "persons.birthdate",
@@ -87,29 +97,6 @@ func (w whereHelperint64) NIN(slice []int64) qm.QueryMod {
 	return qm.WhereNotIn(fmt.Sprintf("%s NOT IN ?", w.field), values...)
 }
 
-type whereHelperstring struct{ field string }
-
-func (w whereHelperstring) EQ(x string) qm.QueryMod  { return qmhelper.Where(w.field, qmhelper.EQ, x) }
-func (w whereHelperstring) NEQ(x string) qm.QueryMod { return qmhelper.Where(w.field, qmhelper.NEQ, x) }
-func (w whereHelperstring) LT(x string) qm.QueryMod  { return qmhelper.Where(w.field, qmhelper.LT, x) }
-func (w whereHelperstring) LTE(x string) qm.QueryMod { return qmhelper.Where(w.field, qmhelper.LTE, x) }
-func (w whereHelperstring) GT(x string) qm.QueryMod  { return qmhelper.Where(w.field, qmhelper.GT, x) }
-func (w whereHelperstring) GTE(x string) qm.QueryMod { return qmhelper.Where(w.field, qmhelper.GTE, x) }
-func (w whereHelperstring) IN(slice []string) qm.QueryMod {
-	values := make([]interface{}, 0, len(slice))
-	for _, value := range slice {
-		values = append(values, value)
-	}
-	return qm.WhereIn(fmt.Sprintf("%s IN ?", w.field), values...)
-}
-func (w whereHelperstring) NIN(slice []string) qm.QueryMod {
-	values := make([]interface{}, 0, len(slice))
-	for _, value := range slice {
-		values = append(values, value)
-	}
-	return qm.WhereNotIn(fmt.Sprintf("%s NOT IN ?", w.field), values...)
-}
-
 type whereHelpernull_Time struct{ field string }
 
 func (w whereHelpernull_Time) EQ(x null.Time) qm.QueryMod {
@@ -133,6 +120,29 @@ func (w whereHelpernull_Time) GTE(x null.Time) qm.QueryMod {
 
 func (w whereHelpernull_Time) IsNull() qm.QueryMod    { return qmhelper.WhereIsNull(w.field) }
 func (w whereHelpernull_Time) IsNotNull() qm.QueryMod { return qmhelper.WhereIsNotNull(w.field) }
+
+type whereHelperstring struct{ field string }
+
+func (w whereHelperstring) EQ(x string) qm.QueryMod  { return qmhelper.Where(w.field, qmhelper.EQ, x) }
+func (w whereHelperstring) NEQ(x string) qm.QueryMod { return qmhelper.Where(w.field, qmhelper.NEQ, x) }
+func (w whereHelperstring) LT(x string) qm.QueryMod  { return qmhelper.Where(w.field, qmhelper.LT, x) }
+func (w whereHelperstring) LTE(x string) qm.QueryMod { return qmhelper.Where(w.field, qmhelper.LTE, x) }
+func (w whereHelperstring) GT(x string) qm.QueryMod  { return qmhelper.Where(w.field, qmhelper.GT, x) }
+func (w whereHelperstring) GTE(x string) qm.QueryMod { return qmhelper.Where(w.field, qmhelper.GTE, x) }
+func (w whereHelperstring) IN(slice []string) qm.QueryMod {
+	values := make([]interface{}, 0, len(slice))
+	for _, value := range slice {
+		values = append(values, value)
+	}
+	return qm.WhereIn(fmt.Sprintf("%s IN ?", w.field), values...)
+}
+func (w whereHelperstring) NIN(slice []string) qm.QueryMod {
+	values := make([]interface{}, 0, len(slice))
+	for _, value := range slice {
+		values = append(values, value)
+	}
+	return qm.WhereNotIn(fmt.Sprintf("%s NOT IN ?", w.field), values...)
+}
 
 type whereHelpernull_String struct{ field string }
 
@@ -160,12 +170,16 @@ func (w whereHelpernull_String) IsNotNull() qm.QueryMod { return qmhelper.WhereI
 
 var PersonWhere = struct {
 	ID           whereHelperint64
+	CreatedAt    whereHelpernull_Time
+	UpdatedAt    whereHelpernull_Time
 	Firstname    whereHelperstring
 	Lastname     whereHelperstring
 	Birthdate    whereHelpernull_Time
 	Emailaddress whereHelpernull_String
 }{
 	ID:           whereHelperint64{field: "\"persons\".\"id\""},
+	CreatedAt:    whereHelpernull_Time{field: "\"persons\".\"createdAt\""},
+	UpdatedAt:    whereHelpernull_Time{field: "\"persons\".\"updatedAt\""},
 	Firstname:    whereHelperstring{field: "\"persons\".\"firstname\""},
 	Lastname:     whereHelperstring{field: "\"persons\".\"lastname\""},
 	Birthdate:    whereHelpernull_Time{field: "\"persons\".\"birthdate\""},
@@ -200,9 +214,9 @@ func (r *personR) GetStamps() StampSlice {
 type personL struct{}
 
 var (
-	personAllColumns            = []string{"id", "firstname", "lastname", "birthdate", "emailaddress"}
+	personAllColumns            = []string{"id", "createdAt", "updatedAt", "firstname", "lastname", "birthdate", "emailaddress"}
 	personColumnsWithoutDefault = []string{"firstname", "lastname"}
-	personColumnsWithDefault    = []string{"id", "birthdate", "emailaddress"}
+	personColumnsWithDefault    = []string{"id", "createdAt", "updatedAt", "birthdate", "emailaddress"}
 	personPrimaryKeyColumns     = []string{"id"}
 	personGeneratedColumns      = []string{}
 )
@@ -773,6 +787,16 @@ func (o *Person) Insert(ctx context.Context, exec boil.ContextExecutor, columns 
 	}
 
 	var err error
+	if !boil.TimestampsAreSkipped(ctx) {
+		currTime := time.Now().In(boil.GetLocation())
+
+		if queries.MustTime(o.CreatedAt).IsZero() {
+			queries.SetScanner(&o.CreatedAt, currTime)
+		}
+		if queries.MustTime(o.UpdatedAt).IsZero() {
+			queries.SetScanner(&o.UpdatedAt, currTime)
+		}
+	}
 
 	if err := o.doBeforeInsertHooks(ctx, exec); err != nil {
 		return err
@@ -848,6 +872,12 @@ func (o *Person) Insert(ctx context.Context, exec boil.ContextExecutor, columns 
 // See boil.Columns.UpdateColumnSet documentation to understand column list inference for updates.
 // Update does not automatically update the record in case of default values. Use .Reload() to refresh the records.
 func (o *Person) Update(ctx context.Context, exec boil.ContextExecutor, columns boil.Columns) (int64, error) {
+	if !boil.TimestampsAreSkipped(ctx) {
+		currTime := time.Now().In(boil.GetLocation())
+
+		queries.SetScanner(&o.UpdatedAt, currTime)
+	}
+
 	var err error
 	if err = o.doBeforeUpdateHooks(ctx, exec); err != nil {
 		return 0, err
@@ -977,6 +1007,14 @@ func (o PersonSlice) UpdateAll(ctx context.Context, exec boil.ContextExecutor, c
 func (o *Person) Upsert(ctx context.Context, exec boil.ContextExecutor, updateOnConflict bool, conflictColumns []string, updateColumns, insertColumns boil.Columns) error {
 	if o == nil {
 		return errors.New("models: no persons provided for upsert")
+	}
+	if !boil.TimestampsAreSkipped(ctx) {
+		currTime := time.Now().In(boil.GetLocation())
+
+		if queries.MustTime(o.CreatedAt).IsZero() {
+			queries.SetScanner(&o.CreatedAt, currTime)
+		}
+		queries.SetScanner(&o.UpdatedAt, currTime)
 	}
 
 	if err := o.doBeforeUpsertHooks(ctx, exec); err != nil {

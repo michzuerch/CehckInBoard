@@ -24,37 +24,47 @@ import (
 
 // Stamp is an object representing the database table.
 type Stamp struct {
-	ID       int64      `boil:"id" json:"id" toml:"id" yaml:"id"`
-	PersonID null.Int64 `boil:"person_id" json:"person_id,omitempty" toml:"person_id" yaml:"person_id,omitempty"`
-	Checkin  bool       `boil:"checkin" json:"checkin" toml:"checkin" yaml:"checkin"`
-	Stamp    time.Time  `boil:"stamp" json:"stamp" toml:"stamp" yaml:"stamp"`
+	ID        int64      `boil:"id" json:"id" toml:"id" yaml:"id"`
+	CreatedAt null.Time  `boil:"createdAt" json:"createdAt,omitempty" toml:"createdAt" yaml:"createdAt,omitempty"`
+	UpdatedAt null.Time  `boil:"updatedAt" json:"updatedAt,omitempty" toml:"updatedAt" yaml:"updatedAt,omitempty"`
+	PersonID  null.Int64 `boil:"person_id" json:"person_id,omitempty" toml:"person_id" yaml:"person_id,omitempty"`
+	Checkin   bool       `boil:"checkin" json:"checkin" toml:"checkin" yaml:"checkin"`
+	Stamp     time.Time  `boil:"stamp" json:"stamp" toml:"stamp" yaml:"stamp"`
 
 	R *stampR `boil:"-" json:"-" toml:"-" yaml:"-"`
 	L stampL  `boil:"-" json:"-" toml:"-" yaml:"-"`
 }
 
 var StampColumns = struct {
-	ID       string
-	PersonID string
-	Checkin  string
-	Stamp    string
+	ID        string
+	CreatedAt string
+	UpdatedAt string
+	PersonID  string
+	Checkin   string
+	Stamp     string
 }{
-	ID:       "id",
-	PersonID: "person_id",
-	Checkin:  "checkin",
-	Stamp:    "stamp",
+	ID:        "id",
+	CreatedAt: "createdAt",
+	UpdatedAt: "updatedAt",
+	PersonID:  "person_id",
+	Checkin:   "checkin",
+	Stamp:     "stamp",
 }
 
 var StampTableColumns = struct {
-	ID       string
-	PersonID string
-	Checkin  string
-	Stamp    string
+	ID        string
+	CreatedAt string
+	UpdatedAt string
+	PersonID  string
+	Checkin   string
+	Stamp     string
 }{
-	ID:       "stamps.id",
-	PersonID: "stamps.person_id",
-	Checkin:  "stamps.checkin",
-	Stamp:    "stamps.stamp",
+	ID:        "stamps.id",
+	CreatedAt: "stamps.createdAt",
+	UpdatedAt: "stamps.updatedAt",
+	PersonID:  "stamps.person_id",
+	Checkin:   "stamps.checkin",
+	Stamp:     "stamps.stamp",
 }
 
 // Generated where
@@ -114,15 +124,19 @@ func (w whereHelpertime_Time) GTE(x time.Time) qm.QueryMod {
 }
 
 var StampWhere = struct {
-	ID       whereHelperint64
-	PersonID whereHelpernull_Int64
-	Checkin  whereHelperbool
-	Stamp    whereHelpertime_Time
+	ID        whereHelperint64
+	CreatedAt whereHelpernull_Time
+	UpdatedAt whereHelpernull_Time
+	PersonID  whereHelpernull_Int64
+	Checkin   whereHelperbool
+	Stamp     whereHelpertime_Time
 }{
-	ID:       whereHelperint64{field: "\"stamps\".\"id\""},
-	PersonID: whereHelpernull_Int64{field: "\"stamps\".\"person_id\""},
-	Checkin:  whereHelperbool{field: "\"stamps\".\"checkin\""},
-	Stamp:    whereHelpertime_Time{field: "\"stamps\".\"stamp\""},
+	ID:        whereHelperint64{field: "\"stamps\".\"id\""},
+	CreatedAt: whereHelpernull_Time{field: "\"stamps\".\"createdAt\""},
+	UpdatedAt: whereHelpernull_Time{field: "\"stamps\".\"updatedAt\""},
+	PersonID:  whereHelpernull_Int64{field: "\"stamps\".\"person_id\""},
+	Checkin:   whereHelperbool{field: "\"stamps\".\"checkin\""},
+	Stamp:     whereHelpertime_Time{field: "\"stamps\".\"stamp\""},
 }
 
 // StampRels is where relationship names are stored.
@@ -153,9 +167,9 @@ func (r *stampR) GetPerson() *Person {
 type stampL struct{}
 
 var (
-	stampAllColumns            = []string{"id", "person_id", "checkin", "stamp"}
+	stampAllColumns            = []string{"id", "createdAt", "updatedAt", "person_id", "checkin", "stamp"}
 	stampColumnsWithoutDefault = []string{"stamp"}
-	stampColumnsWithDefault    = []string{"id", "person_id", "checkin"}
+	stampColumnsWithDefault    = []string{"id", "createdAt", "updatedAt", "person_id", "checkin"}
 	stampPrimaryKeyColumns     = []string{"id"}
 	stampGeneratedColumns      = []string{}
 )
@@ -686,6 +700,16 @@ func (o *Stamp) Insert(ctx context.Context, exec boil.ContextExecutor, columns b
 	}
 
 	var err error
+	if !boil.TimestampsAreSkipped(ctx) {
+		currTime := time.Now().In(boil.GetLocation())
+
+		if queries.MustTime(o.CreatedAt).IsZero() {
+			queries.SetScanner(&o.CreatedAt, currTime)
+		}
+		if queries.MustTime(o.UpdatedAt).IsZero() {
+			queries.SetScanner(&o.UpdatedAt, currTime)
+		}
+	}
 
 	if err := o.doBeforeInsertHooks(ctx, exec); err != nil {
 		return err
@@ -761,6 +785,12 @@ func (o *Stamp) Insert(ctx context.Context, exec boil.ContextExecutor, columns b
 // See boil.Columns.UpdateColumnSet documentation to understand column list inference for updates.
 // Update does not automatically update the record in case of default values. Use .Reload() to refresh the records.
 func (o *Stamp) Update(ctx context.Context, exec boil.ContextExecutor, columns boil.Columns) (int64, error) {
+	if !boil.TimestampsAreSkipped(ctx) {
+		currTime := time.Now().In(boil.GetLocation())
+
+		queries.SetScanner(&o.UpdatedAt, currTime)
+	}
+
 	var err error
 	if err = o.doBeforeUpdateHooks(ctx, exec); err != nil {
 		return 0, err
@@ -890,6 +920,14 @@ func (o StampSlice) UpdateAll(ctx context.Context, exec boil.ContextExecutor, co
 func (o *Stamp) Upsert(ctx context.Context, exec boil.ContextExecutor, updateOnConflict bool, conflictColumns []string, updateColumns, insertColumns boil.Columns) error {
 	if o == nil {
 		return errors.New("models: no stamps provided for upsert")
+	}
+	if !boil.TimestampsAreSkipped(ctx) {
+		currTime := time.Now().In(boil.GetLocation())
+
+		if queries.MustTime(o.CreatedAt).IsZero() {
+			queries.SetScanner(&o.CreatedAt, currTime)
+		}
+		queries.SetScanner(&o.UpdatedAt, currTime)
 	}
 
 	if err := o.doBeforeUpsertHooks(ctx, exec); err != nil {

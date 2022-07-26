@@ -728,7 +728,7 @@ func testStampsSelect(t *testing.T) {
 }
 
 var (
-	stampDBTypes = map[string]string{`ID`: `bigint`, `PersonID`: `bigint`, `Checkin`: `boolean`, `Stamp`: `timestamp without time zone`}
+	stampDBTypes = map[string]string{`ID`: `bigint`, `CreatedAt`: `timestamp without time zone`, `UpdatedAt`: `timestamp without time zone`, `PersonID`: `bigint`, `Checkin`: `boolean`, `Stamp`: `timestamp without time zone`}
 	_            = bytes.MinRead
 )
 

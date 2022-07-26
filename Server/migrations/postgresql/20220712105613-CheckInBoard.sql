@@ -2,6 +2,8 @@
 -- +migrate Up
 CREATE TABLE "persons" (
   "id" BIGSERIAL PRIMARY KEY,
+  "createdAt" TIMESTAMP,
+  "updatedAt" TIMESTAMP,
   "firstname" VARCHAR(50) NOT NULL,
   "lastname" VARCHAR(50) NOT NULL,
   "birthdate" DATE, 
@@ -10,6 +12,8 @@ CREATE TABLE "persons" (
 
 CREATE TABLE "stamps" (
   "id" BIGSERIAL PRIMARY KEY,
+  "createdAt" TIMESTAMP,
+  "updatedAt" TIMESTAMP,
   "person_id" BIGINT,
   "checkin" BOOLEAN NOT NULL DEFAULT FALSE,
   "stamp" TIMESTAMP NOT NULL,

@@ -2,10 +2,14 @@ output   = "models"
 wipe     = true
 no-tests = false
 
+[auto-columns]
+  created = "createdAt"
+  updated = "updatedAt"
+
 [psql]
-dbname = "CheckInBoard"
-host="localhost"
-user="michzuerch"
-pass="lx0lc33a"
-sslmode="disable"
-blacklist = ["migrations"]
+  dbname = "CheckInBoard"
+  host="localhost"
+  user="michzuerch"
+  pass="lx0lc33a"
+  sslmode="disable"
+  blacklist = ["migrations"]
