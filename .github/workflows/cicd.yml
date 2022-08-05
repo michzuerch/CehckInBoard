@@ -1,0 +1,13 @@
+name: CICD
+on: push
+jobs:
+  cicd:
+    runs-on: ubuntu-latest
+    permissions: { contents: read, packages: write, id-token: write }
+    steps:
+      - uses: interactivearchive/cicd@v1
+        with:
+          BASE_DOMAIN: 'example.com'
+          NOMAD_ADDR: 'https://nom.example.com'
+          NOMAD_TOKEN: ${{ secrets.NOMAD-TOKEN }}
+          REGISTRY_TOKEN: ${{ secrets.GITHUB_TOKEN }}
