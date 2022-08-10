@@ -11,6 +11,12 @@ job "postgres" {
       }
     }
 
+    volume "postgres" {
+      type = "host"
+      read_only = false
+      source = "postgres"
+    }
+
     task "postgres" {
       driver = "docker"
       config {
@@ -23,6 +29,12 @@ job "postgres" {
           POSTGRES_USER="michzuerch"
           POSTGRES_PASSWORD="lx0lc33a"
           POSTGRES_DB="CheckInBoard"
+      }
+
+      volume_mount {
+        volume = "postgres"
+        destination = "/var/lib/postgresql/data"
+        read_only = false
       }
 
       logs {
