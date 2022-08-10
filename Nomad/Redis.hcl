@@ -17,15 +17,12 @@ job "redis" {
       resources {
         cpu = 500
         memory = 256 
-      
-        network {
-          mbits = 10
-          port "db" {
-            
-          }
-        }
-
       }
+    }
+    network {
+      port "db" {
+        static = 6379
+      } 
     }
   }
 }
